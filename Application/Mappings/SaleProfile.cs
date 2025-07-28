@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Application.DTOs;
-using Domain.Enitities;
+using SalesSystem.Application.DTOs.Sale;
+using SalesSystem.Domain.Enitities;
 
-namespace Application.Mappings;
+namespace SalesSystem.Application.Mappings;
 
 public class SaleProfile : Profile
 {

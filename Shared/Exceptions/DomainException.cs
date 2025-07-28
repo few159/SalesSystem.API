@@ -1,4 +1,4 @@
-﻿namespace Shared.Exceptions;
+﻿namespace SalesSystem.Shared.Exceptions;
 
 public class DomainException : Exception
 {

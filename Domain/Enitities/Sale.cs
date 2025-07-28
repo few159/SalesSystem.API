@@ -1,4 +1,6 @@
-﻿namespace Domain.Enitities;
+﻿using SalesSystem.Domain.ValueObjects.Enums;
+
+namespace SalesSystem.Domain.Enitities;
 
 public class Sale
 {
@@ -14,10 +16,13 @@ public class Sale
 
     public decimal TotalAmount => Items.Sum(item => item.Total);
     public bool IsCancelled { get; private set; }
+    public SaleType SaleType { get; private set; } = SaleType.Quotation;
 
     public List<SaleItem> Items { get; private set; } = [];
 
-    public Sale(string customerId, string customerName, string branchId, string branchName)
+    private Sale() { }
+    
+    public Sale(string customerId, string customerName, string branchId, string branchName, SaleType? saleType = SaleType.Quotation)
     {
         Id = Guid.NewGuid();
         SaleNumber = GenerateSaleNumber();
@@ -26,6 +31,7 @@ public class Sale
         CustomerName = customerName;
         BranchId = branchId;
         BranchName = branchName;
+        SaleType = saleType.Value;
     }
 
     public void AddItem(Guid productId, string productTitle, decimal unitPrice, int quantity)

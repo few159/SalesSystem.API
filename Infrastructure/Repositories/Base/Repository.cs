@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
-using Domain.Interfaces.Repositories.Base;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using SalesSystem.Application.Interfaces.Repositories.Base;
+using SalesSystem.Infrastructure.Persistence;
+using SalesSystem.Shared.Extensions;
 
-namespace Infrastructure.Repositories.Base;
+namespace SalesSystem.Infrastructure.Repositories.Base;
 
 public abstract class Repository<T>(SalesDbContext context) : IRepository<T> where T : class
 {
@@ -11,6 +12,14 @@ public abstract class Repository<T>(SalesDbContext context) : IRepository<T> whe
     protected readonly DbSet<T> _dbSet = context.Set<T>();
 
     public virtual IQueryable<T> Query() => _dbSet.AsNoTracking().AsQueryable();
+
+    public virtual IQueryable<T> Query(Dictionary<string, string>? filters, string? order)
+    {
+        var query = _dbSet.AsNoTracking().AsQueryable();
+        if (filters != null) query = query.ApplyFilters(filters);
+        if (order != null) query = query.ApplyOrdering(order);
+        return query;
+    }
 
     public virtual async Task<List<T>> GetAllAsync() => await _dbSet.ToListAsync();
 

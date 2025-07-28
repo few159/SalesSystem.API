@@ -1,4 +1,4 @@
-﻿namespace Domain.Enitities;
+﻿namespace SalesSystem.Domain.Enitities;
 
 public class SaleItem
 {

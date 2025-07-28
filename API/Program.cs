@@ -1,9 +1,12 @@
-using Application.Mappings;
-using Infrastructure;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Rebus.Config;
 using SalesSystem.API.Middlewares;
+using SalesSystem.Application.Commands.Sales;
+using SalesSystem.Application.Mappings;
+using SalesSystem.Infrastructure;
+using SalesSystem.Infrastructure.Persistence;
+using SalesSystem.Infrastructure.Repositories.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,10 +48,10 @@ builder.Services.AddSwaggerGen(
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddDbContext<SalesDbContext>(opt =>
-    opt.UseNpgsql("Host=127.0.0.1:5433;Username=SA_User;Password=adm1234#;Database=SalesSystem")
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDb"))
 );
 
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(CreateSaleCommand).Assembly));
 builder.Services.AddAutoMapper(cfg => { }, typeof(SaleProfile));
 
 var app = builder.Build();
@@ -60,11 +63,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Seed Data
+new SeederRun(app.Services);
+
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseRouting();
 
 app.MapControllers();
+
+// Starta o Rebus
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    app.Services.StartRebus();
+});
 
 app.Run();

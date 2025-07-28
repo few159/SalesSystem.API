@@ -1,8 +1,8 @@
-﻿using Application.Commands.Sales;
-using Application.DTOs;
-using Application.Queries.Sales;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SalesSystem.API.Controllers.Base;
+using SalesSystem.Application.Commands.Sales;
+using SalesSystem.Application.DTOs.Sale;
+using SalesSystem.Application.Queries.Sales;
 
 namespace SalesSystem.API.Controllers;
 
@@ -14,43 +14,28 @@ public class SalesController : ApiBaseController
         var result = await Mediator.Send(new GetSaleQuery(saleId));
         return Ok(result);
     }
-    
+
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<SaleDto>), 200)]
-    public async Task<IActionResult> GetSales()
+    public async Task<IActionResult> GetSales([FromQuery] GetSalesQuery query)
     {
+        query.Filters = GetFiltersFromRequest();
+
         var result = await Mediator.Send(new GetSalesQuery());
         return Ok(result);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateSale([FromBody] CreateSaleCommand command)
     {
         var result = await Mediator.Send(command);
         return CreatedAtAction(nameof(CreateSale), new { id = result.Id }, result);
     }
-    
-    [HttpPost("{saleId}/cancel-item")]
-    public async Task<IActionResult> CancelSaleItem([FromRoute] Guid saleId)
+
+    [HttpPut("{saleId}/cancel")]
+    public async Task<IActionResult> CancelSale([FromRoute] Guid saleId)
     {
-        throw new NotImplementedException();
-        // var result = await Mediator.Send(command);
-        // return CreatedAtAction(nameof(CreateSale), new { id = result.Id }, result);
-    }
-    
-    [HttpPut]
-    public async Task<IActionResult> UpdateSale([FromBody] CreateSaleCommand command)
-    {
-        throw new NotImplementedException();
-        var result = await Mediator.Send(command);
-        return CreatedAtAction(nameof(CreateSale), new { id = result.Id }, result);
-    }
-    
-    [HttpDelete("{saleId}")]
-    public async Task<IActionResult> DeleteSale([FromRoute] Guid saleId)
-    {
-        throw new NotImplementedException();
-        // var result = await Mediator.Send(command);
-        // return CreatedAtAction(nameof(CreateSale), new { id = result.Id }, result);
+        var result = await Mediator.Send(new CancelSaleCommand() { SaleId = saleId });
+        return Ok(result);
     }
 }

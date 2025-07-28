@@ -1,26 +1,8 @@
-﻿using Infrastructure.Persistence;
+﻿using SalesSystem.Application.Interfaces.Repositories.Base;
+using SalesSystem.Infrastructure.Persistence;
 
-namespace Infrastructure.Repositories.Base;
+namespace SalesSystem.Infrastructure.Repositories.Base;
 
-public interface IUnitOfWork
-{
-    void Save();
-
-    bool BeginTransaction();
-
-    Task BeginTransactionAsync();
-
-    void RollBack();
-    Task RollBackAsync();
-
-    void Commit();
-
-    Task SaveAsync();
-
-    Task CommitAsync();
-
-    SalesDbContext GetContext();
-}
 public class UnitOfWork : IUnitOfWork
 {
     private readonly SalesDbContext _ctx;
