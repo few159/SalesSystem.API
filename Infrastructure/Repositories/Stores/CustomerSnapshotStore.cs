@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using SalesSystem.Application.Interfaces.Repositories.Stores;
-using SalesSystem.Domain.Enitities.Snapshot;
+using SalesSystem.Domain.Entities.Snapshot;
 
 namespace SalesSystem.Infrastructure.Repositories.Stores;
 

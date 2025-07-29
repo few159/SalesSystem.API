@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Rebus.Config;
 using SalesSystem.API.Middlewares;
-using SalesSystem.Application.Commands.Sales;
+using SalesSystem.Application.Commands.Sale;
 using SalesSystem.Application.Mappings;
 using SalesSystem.Infrastructure;
 using SalesSystem.Infrastructure.Persistence;

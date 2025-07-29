@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SalesSystem.Application.Interfaces.Services;
-using SalesSystem.Domain.Enitities;
+using SalesSystem.Domain.Entities;
 
 namespace SalesSystem.Infrastructure.Services;
 

@@ -1,4 +1,4 @@
-﻿namespace SalesSystem.Domain.Enitities;
+﻿namespace SalesSystem.Domain.Entities;
 
 public class Cart
 {

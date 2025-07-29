@@ -1,10 +1,10 @@
 ﻿using SalesSystem.Domain.ValueObjects.Enums;
 
-namespace SalesSystem.Domain.Enitities;
+namespace SalesSystem.Domain.Entities;
 
 public class Sale
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; set; }
     public string SaleNumber { get; private set; }
     public DateTime Date { get; private set; }
 
@@ -20,7 +20,7 @@ public class Sale
 
     public List<SaleItem> Items { get; private set; } = [];
 
-    private Sale() { }
+    public Sale() { }
     
     public Sale(string customerId, string customerName, string branchId, string branchName, SaleType? saleType = SaleType.Quotation)
     {

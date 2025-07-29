@@ -4,7 +4,7 @@ using SalesSystem.Application.DTOs.Cart;
 using SalesSystem.Application.Interfaces.Repositories;
 using SalesSystem.Application.Interfaces.Repositories.Base;
 using SalesSystem.Application.Interfaces.Repositories.Stores;
-using SalesSystem.Domain.Enitities;
+using SalesSystem.Domain.Entities;
 
 namespace SalesSystem.Application.Commands.Carts;
 

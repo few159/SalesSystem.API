@@ -1,5 +1,5 @@
 ﻿using SalesSystem.Application.Interfaces.Repositories.Base;
-using SalesSystem.Domain.Enitities;
+using SalesSystem.Domain.Entities;
 
 namespace SalesSystem.Application.Interfaces.Repositories;
 

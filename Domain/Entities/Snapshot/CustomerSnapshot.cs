@@ -1,6 +1,6 @@
-﻿namespace SalesSystem.Domain.Enitities.Snapshot;
+﻿namespace SalesSystem.Domain.Entities.Snapshot;
 
-public class BranchSnapshot
+public class CustomerSnapshot
 {
     public string Id { get; set; } = default!;
     public string Name { get; set; } = string.Empty;

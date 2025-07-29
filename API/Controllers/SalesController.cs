@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesSystem.API.Controllers.Base;
-using SalesSystem.Application.Commands.Sales;
+using SalesSystem.Application.Commands.Sale;
 using SalesSystem.Application.DTOs.Sale;
 using SalesSystem.Application.Queries.Sales;
 

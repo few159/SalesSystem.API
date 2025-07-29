@@ -6,10 +6,9 @@ using SalesSystem.Application.Interfaces;
 using SalesSystem.Application.Interfaces.Repositories;
 using SalesSystem.Application.Interfaces.Repositories.Base;
 using SalesSystem.Application.Interfaces.Repositories.Stores;
-using SalesSystem.Domain.Enitities;
 using SalesSystem.Domain.ValueObjects.Enums;
 
-namespace SalesSystem.Application.Commands.Sales;
+namespace SalesSystem.Application.Commands.Sale;
 
 public class CreateSaleCommand : IRequest<SaleDto>
 {
@@ -41,7 +40,7 @@ public class CreateSaleCommandHandler(
             var branch = await branchSnapshotStore.GetAsync(request.BranchId)
                          ?? throw new Exception("Filial não encontrada");
 
-            var sale = new Sale(request.CustomerId, customer.Name, request.BranchId, branch.Name, request.SaleType);
+            var sale = new Domain.Entities.Sale(request.CustomerId, customer.Name, request.BranchId, branch.Name, request.SaleType);
 
             foreach (var item in request.Items)
             {

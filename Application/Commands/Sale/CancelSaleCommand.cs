@@ -4,7 +4,7 @@ using SalesSystem.Application.Interfaces;
 using SalesSystem.Application.Interfaces.Repositories;
 using SalesSystem.Application.Interfaces.Repositories.Base;
 
-namespace SalesSystem.Application.Commands.Sales;
+namespace SalesSystem.Application.Commands.Sale;
 
 public class CancelSaleCommand : IRequest<bool>
 {

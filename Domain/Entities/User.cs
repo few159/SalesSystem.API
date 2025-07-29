@@ -1,7 +1,7 @@
 ﻿using SalesSystem.Domain.ValueObjects;
 using SalesSystem.Domain.ValueObjects.Enums;
 
-namespace SalesSystem.Domain.Enitities;
+namespace SalesSystem.Domain.Entities;
 
 public class User
 {

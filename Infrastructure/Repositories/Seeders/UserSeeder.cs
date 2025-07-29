@@ -1,4 +1,4 @@
-﻿using SalesSystem.Domain.Enitities;
+﻿using SalesSystem.Domain.Entities;
 using SalesSystem.Domain.ValueObjects.Enums;
 using SalesSystem.Infrastructure.Persistence;
 

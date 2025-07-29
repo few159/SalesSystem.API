@@ -1,4 +1,4 @@
-﻿using SalesSystem.Domain.Enitities.Snapshot;
+﻿using SalesSystem.Domain.Entities.Snapshot;
 
 namespace SalesSystem.Application.Interfaces.Repositories.Stores;
 

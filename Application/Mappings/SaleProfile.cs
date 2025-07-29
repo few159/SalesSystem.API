@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SalesSystem.Application.DTOs.Sale;
-using SalesSystem.Domain.Enitities;
+using SalesSystem.Domain.Entities;
 
 namespace SalesSystem.Application.Mappings;
 

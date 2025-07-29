@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver.Linq;
 using SalesSystem.Application.Interfaces.Repositories;
-using SalesSystem.Domain.Enitities;
+using SalesSystem.Domain.Entities;
 using SalesSystem.Infrastructure.Persistence;
 using SalesSystem.Infrastructure.Repositories.Base;
 

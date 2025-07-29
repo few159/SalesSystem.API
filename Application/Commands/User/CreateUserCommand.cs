@@ -24,7 +24,7 @@ public class CreateUserCommandHandler(
         try
         {
             request.Password = hasher.HashPassword(request.Password);
-            var newUser = mapper.Map<Domain.Enitities.User>(request);
+            var newUser = mapper.Map<Domain.Entities.User>(request);
             await userRepository.InsertAsync(newUser);
 
             await uow.CommitAsync();
