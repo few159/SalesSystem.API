@@ -2,7 +2,7 @@
 
 public class CartDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public int UserId { get; set; }
     public DateTime Date { get; set; }
     public List<CartItemDto> Products { get; set; } = [];
@@ -10,6 +10,6 @@ public class CartDto
 
 public class CartItemDto
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public int Quantity { get; set; }
 }

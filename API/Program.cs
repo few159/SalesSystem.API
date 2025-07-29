@@ -10,6 +10,18 @@ using SalesSystem.Infrastructure.Repositories.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string corsPolicyName = "MainPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName,
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddControllers();
 
 // Add services to the container.
@@ -70,6 +82,8 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseRouting();
+
+app.UseCors(corsPolicyName);
 
 app.MapControllers();
 
