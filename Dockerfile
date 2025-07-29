@@ -16,4 +16,6 @@ COPY --from=build /app/publish .
 
 EXPOSE 7089
 
+ENV ASPNETCORE_URLS=http://+:7089
+
 ENTRYPOINT ["dotnet", "SalesSystem.API.dll"]
