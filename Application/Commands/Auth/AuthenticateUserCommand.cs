@@ -22,7 +22,7 @@ public class AuthenticateUserCommandHandler(
         var user = await userRepository.GetAsync(request.Email)
                    ?? throw new Exception("Usuário ou senha inválidos");
 
-        if (!user.ValidadePassword(hasher.HashPassword(request.Password)))
+        if (!hasher.VerifyPassword(request.Password, user.Password))
             throw new Exception("Usuário ou senha inválidos");
 
         var token = jwtTokenService.GenerateToken(user);

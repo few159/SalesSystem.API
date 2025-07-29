@@ -2,6 +2,18 @@
 
 public class CartItem
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public int Quantity { get; set; }
+    public bool IsCancelled { get; private set; }
+
+    public CartItem(Guid productId, int quantity)
+    {
+        ProductId = Guid.NewGuid();
+        Quantity = quantity;
+    }
+
+    public void Cancel()
+    {
+        IsCancelled = true;
+    }
 }
