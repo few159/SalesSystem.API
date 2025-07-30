@@ -55,8 +55,19 @@ services:
     networks:
       - app-network
 
+  migrator:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      bash -c " dotnet tool install --global dotnet-ef && export PATH=\"$PATH:/root/.dotnet/tools\" && dotnet restore SalesSystem.API/SalesSystem.API.csproj && dotnet ef database update --project SalesSystem.Infrastructure --startup-project SalesSystem.API"
+    depends_on:
+      - postgres
+
 volumes:
   pgdata:
+
 
 networks:
   app-network:

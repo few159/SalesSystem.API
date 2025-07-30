@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SalesSystem.API.Controllers.Base;
 using SalesSystem.Application.Commands.Auth;
 using SalesSystem.Application.DTOs.Auth;
@@ -7,6 +8,7 @@ namespace SalesSystem.API.Controllers;
 
 public class AuthController : ApiBaseController
 {
+    [AllowAnonymous]
     [HttpPost("login")]
     [ProducesResponseType(typeof(IEnumerable<TokenDto>), 200)]
     public async Task<IActionResult> Login([FromBody] AuthenticateUserCommand command)

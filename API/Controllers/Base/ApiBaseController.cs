@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SalesSystem.Shared.Extensions;
 
 namespace SalesSystem.API.Controllers.Base;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public abstract class ApiBaseController: ControllerBase

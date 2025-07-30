@@ -31,30 +31,30 @@ builder.Services.AddSwaggerGen(
     opt =>
     {
         opt.SwaggerDoc("v1", new OpenApiInfo { Title = "SalesSystem", Version = "v1" });
-        // opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-        // {
-        //     In = ParameterLocation.Header,
-        //     Description = "Please enter token",
-        //     Name = "Authorization",
-        //     Type = SecuritySchemeType.Http,
-        //     BearerFormat = "JWT",
-        //     Scheme = "bearer"
-        // });
-        //
-        // opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-        // {
-        //     {
-        //         new OpenApiSecurityScheme
-        //         {
-        //             Reference = new OpenApiReference
-        //             {
-        //                 Type = ReferenceType.SecurityScheme,
-        //                 Id = "Bearer"
-        //             }
-        //         },
-        //         new string[] { }
-        //     }
-        // });
+        opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Please enter token",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer"
+        });
+
+        opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] { }
+            }
+        });
     });
 
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -78,7 +78,7 @@ if (app.Environment.IsDevelopment())
 // Seed Data
 new SeederRun(app.Services);
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseRouting();
@@ -88,9 +88,9 @@ app.UseCors(corsPolicyName);
 app.MapControllers();
 
 // Starta o Rebus
-app.Lifetime.ApplicationStarted.Register(() =>
-{
-    app.Services.StartRebus();
-});
+app.Lifetime.ApplicationStarted.Register(() => { app.Services.StartRebus(); });
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
