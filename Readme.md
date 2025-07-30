@@ -1,11 +1,3 @@
-Perfeito! Vou elaborar um README detalhado dividido em duas seções:
-
-1. **Como rodar o projeto localmente**, incluindo Docker, variáveis de ambiente e autenticação.
-2. **Decisões técnicas adotadas no projeto**, com base na arquitetura DDD, uso de CQRS, Rebus, MongoDB, etc.
-
-Vou começar agora e te aviso quando estiver pronto para revisão.
-
-
 # SalesSystem.API
 
 ## Como rodar o projeto localmente
@@ -13,7 +5,7 @@ Vou começar agora e te aviso quando estiver pronto para revisão.
 Para executar o **SalesSystem.API** localmente, certifique-se de ter o Docker e o Docker Compose instalados em sua máquina. Siga os passos abaixo:
 
 1. **Clonar o repositório:** Faça o clone do projeto `SalesSystem.API` em seu ambiente local. Navegue até o diretório raiz do projeto.
-2. **Configurar variáveis de ambiente:** Antes de iniciar, defina as variáveis de ambiente necessárias. Em particular, é preciso configurar o **segredo JWT (JWT Secret)** utilizado para assinar tokens. Você pode fazer isso criando um arquivo `.env` na raiz do projeto ou definindo a variável de ambiente diretamente. (Por exemplo: `JwtExtension__Secret` com um valor seguro). Se houver outras variáveis, como strings de conexão para banco de dados PostgreSQL ou credenciais do RabbitMQ, configure-as conforme necessário. *Dica:* Em .NET Core, o algoritmo recomendado para hash de senhas é o PBKDF2 – o projeto utiliza esse padrão, então mantenha o segredo JWT protegido.
+2. **Configurar variáveis de ambiente:** As váriaveis já se encontram configuradas no projeto, não há necessidade de nenhuma configuração externa.
 3. **Subir os serviços com Docker Compose:** No diretório do projeto, execute o comando:
 
    ```bash
@@ -26,7 +18,7 @@ Para executar o **SalesSystem.API** localmente, certifique-se de ter o Docker e 
    * **MongoDB:** banco NoSQL utilizado para **snapshots** (instantâneos de estado do domínio) e possivelmente para consultas otimizadas.
    * **RabbitMQ:** broker de mensageria para processamento de eventos assíncronos (usado em conjunto com a biblioteca Rebus).
      Esses serviços são iniciados automaticamente em uma rede Docker interna, permitindo que a API comunique-se com eles pelos nomes de host dos containers (e.g. `postgres` para o PostgreSQL, `mongo` para o MongoDB, `rabbitmq` para o RabbitMQ).
-4. **Aguardar inicialização:** Aguarde até que todos os containers estejam de pé. O banco PostgreSQL geralmente roda na porta padrão 5432, o MongoDB na 27017 e o RabbitMQ na 5672 (com painel de controle possivelmente na 15672). O container da API deve expor a aplicação (verifique no log a porta – por padrão pode ser a 8080 ou 5000/5001). Assim que a API indicar que está ouvindo requisições HTTP, o sistema estará pronto.
+4. **Aguardar inicialização:** Aguarde até que todos os containers estejam de pé. O banco PostgreSQL geralmente roda na porta 5433, o MongoDB na 27017 e o RabbitMQ na 5672 (com painel de controle possivelmente na 15672). O container da API deve expor a aplicação (verifique no log a porta – por padrão pode ser a 8080 ou 5000/5001). Assim que a API indicar que está ouvindo requisições HTTP, o sistema estará pronto.
 5. **Testar a API e autenticação:** Você pode acessar os endpoints da API (por exemplo, via *Swagger* se habilitado ou via ferramentas como *Postman*). Para testar a **autenticação**, utilize as rotas de registro e login fornecidas:
 
    * **Registrar novo usuário:** `POST /api/v1/registers` com os dados do usuário (nome, email, senha etc) para criar uma conta.
